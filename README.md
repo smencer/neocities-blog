@@ -113,6 +113,34 @@ neocities key         # Retrieve and save API key
 neocities key -show   # Display current API key
 ```
 
+### blog
+
+Manage a markdown-based blog. Write posts in markdown, generate HTML, and sync to your site.
+
+```bash
+neocities blog init                    # Create posts/ and drafts/ directories
+neocities blog new "My First Post"     # Create a new post with today's date
+neocities blog new -draft "WIP"        # Create a draft (not published)
+neocities blog build                   # Generate HTML to blog/
+neocities blog build -out public/blog  # Generate to custom directory
+```
+
+**Post filename format:** `YYYY-MM-DD-slug-title.md`
+
+Example: `2024-01-15-hello-world.md` creates a post dated January 15, 2024 with the title "Hello World".
+
+**Directory structure after `blog init`:**
+```
+site/
+├── posts/           # Published markdown files
+├── drafts/          # Unpublished posts (ignored by build)
+└── blog/            # Generated HTML output
+    ├── index.html
+    └── hello-world.html
+```
+
+The `posts/` and `drafts/` directories are automatically excluded from sync, so only the generated HTML in `blog/` is uploaded.
+
 ## Configuration
 
 ### .neocities.json
@@ -128,7 +156,9 @@ Place this file in your site root to configure sync behavior:
     ".neocities.json",
     "node_modules",
     ".DS_Store",
-    "Thumbs.db"
+    "Thumbs.db",
+    "posts",
+    "drafts"
   ]
 }
 ```
@@ -151,6 +181,22 @@ neocities sync
 # Check status
 neocities info
 neocities list -l
+```
+
+## Blogging Workflow
+
+```bash
+# Set up blog in existing site
+cd mysite
+neocities blog init
+
+# Create a new post
+neocities blog new "Hello World"
+# Edit posts/2024-01-15-hello-world.md
+
+# Build and deploy
+neocities blog build
+neocities sync
 ```
 
 ## API Rate Limiting

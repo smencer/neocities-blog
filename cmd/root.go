@@ -22,6 +22,7 @@ Commands:
   info [sitename]      Get information about a site
   sync                 Synchronize local site to Neocities
   key                  Retrieve and save your API key
+  blog <subcommand>    Manage blog posts (init, build, new)
   version              Show version information
   help                 Show this help message
 
@@ -61,6 +62,8 @@ func Run() {
 		RunSync(os.Args[2:])
 	case "key":
 		RunKey(os.Args[2:])
+	case "blog":
+		RunBlog(os.Args[2:])
 	case "version":
 		fmt.Printf("neocities version %s\n", version)
 	case "help", "-h", "--help":

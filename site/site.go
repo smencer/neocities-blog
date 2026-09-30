@@ -28,6 +28,8 @@ var DefaultIgnore = []string{
 	"node_modules",
 	".DS_Store",
 	"Thumbs.db",
+	"posts",
+	"drafts",
 }
 
 // LocalFile represents a local file with its metadata.
